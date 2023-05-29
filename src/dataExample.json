@@ -1,0 +1,23 @@
+{
+  "data": {
+    "blocks": {
+      "AlchemyLantern": {
+        "img_url": "blablabla"
+      }
+    },
+    "palettes": [
+      {
+        "title": "The Muddiest House",
+        "obtainability": "Easy",
+        "creator": null,
+        "tags": ["dirty", "ugly", "simple"],
+        "blocks": [
+          {
+            "name": "DirtBlock",
+            "paint": "Brown"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+@use 'colors.scss' as *;
+
+@use 'utils.scss' as *;
+@use 'scrollbar.scss' as *;
+
+@use 'sections/about-us' as *;
+@use 'sections/palettes' as *;
+@use 'sections/your-ideas' as *;
+@use 'sections/team' as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Andy';
+  src: url('/ANDYB.TTF')
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $black-main;
+  font-family: 'Andy', sans-serif;
+  color: $white-main;
+}

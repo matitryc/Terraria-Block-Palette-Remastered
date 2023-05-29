@@ -1,0 +1,5 @@
+@use '../colors' as *;
+
+.team {
+  background-image: linear-gradient($gradient-one-light, $gradient-one-dark);
+}

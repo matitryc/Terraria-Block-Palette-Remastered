@@ -1,0 +1,101 @@
+@use '../colors.scss' as *;
+
+.your-ideas {
+  background-image: linear-gradient($gradient-two-dark, $gradient-three-dark);
+  padding-inline: 0;
+  .main-style-outer-container {
+    overflow: visible;
+  }
+  .main-style-inner-container {
+    max-height: 400px;
+  }
+  .modal {
+    &-inner {
+      overflow: visible;
+    }
+    &-outer {
+      max-width: 500px;
+    }
+    &-content {
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      gap: 1rem;
+    }
+  }
+  .block-modal {
+    .modal-content {
+      justify-content: center;
+      gap: 1.3rem
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .section-text {
+    padding-inline: 1em;
+  }
+  .add-block,
+  .block {
+    padding: .2em;
+    width: 50px;
+    height: 50px;
+    border: 2px solid $black-main;
+    border-radius: 12px;
+  }
+  .add-block {
+  .question-mark {
+    filter: $svg-to-white-main;
+    width: 100%;
+    &-box {
+      background-color: $black-main;
+      border-radius: 50%;
+    }
+  }
+  .add-block::before {
+    content: '1231321';
+    position: absolute;
+    inset: 0;
+  }
+  .plus-sign {
+    position: absolute;
+    bottom: -16px;
+    right: -16px;
+    width: 40px;
+    height: 40px;
+    filter: $svg-to-green-main;
+    border-radius: 50%;
+    z-index: 2;
+    &-fill {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      background-color: $white-main;
+    }
+  }
+}
+}
+
+@media (min-width: 576px) {
+  .your-ideas {
+    .section-text {
+      padding-inline: 0;
+    }
+    padding-left: 1em;
+    padding-right: 1em;
+    .modal-content {
+      flex-direction: column;
+    }
+    ::-webkit-scrollbar {
+      border-radius: 0 7px 7px 0;
+    }
+  }
+
+}

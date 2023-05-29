@@ -1,0 +1,97 @@
+@use 'colors.scss' as *;
+
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.section {
+  display: flex;
+  font-size: 2.2rem;
+  padding: 1.3em 1em;
+  &-title {
+    margin-bottom: 1em;
+    font-size: 1em;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  &-text {   
+    margin-bottom: .7em;
+    font-size: .7em;
+    text-align: center;
+  }
+}
+
+.icon {
+  transition: opacity .2s;
+  &.focus {
+    opacity: 0;
+  }
+}
+
+.main-style-outer-container {
+  position: relative;
+  background-color: $white-main;
+  border: 3px solid $white-main;
+  overflow: hidden;
+}
+.main-style-inner-container {
+  display: flex;
+  flex-direction: column;
+  gap: .6em;
+  padding: 1.4rem;
+  height: Calc(100vh - 15rem);
+  min-height: 300px;
+  border: 3px solid $black-main;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+input[type="text"] {
+  padding: 0.3em 0.6em;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 100vw 0 0 100vw;
+  transition: color .2s, background-color .2s;
+  &::placeholder {
+    color: $gray-main;
+  }
+  &:focus,
+  &:hover {
+    outline: none;
+    &::placeholder {
+      color: $white-darker;
+    }
+  }
+  &:focus,
+  &:hover {
+    background-color: $purple-main;
+    color: $white-main;
+  }
+}
+
+@media (min-width: 576px) {
+  .section {
+    font-size: 2.5rem;
+  }
+  .main-style-outer-container {
+    border-radius: 12px;
+  }
+  .main-style-inner-container {
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    font-size: 2.7rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .section {
+    font-size: 2.8rem;
+  }
+}

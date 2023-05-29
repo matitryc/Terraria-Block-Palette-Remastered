@@ -1,0 +1,19 @@
+@use '../colors.scss' as *;
+
+.about-us {
+  background-image: linear-gradient($gradient-one-light, $gradient-one-dark);
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .section-text {
+    span, a {
+      -webkit-text-stroke: .4px $white-main;
+    }
+    a {
+      text-decoration: underline;
+    }
+  }
+}

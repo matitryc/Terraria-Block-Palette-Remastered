@@ -1,0 +1,58 @@
+@use '../colors.scss' as *;
+
+.palettes {
+  background-image: linear-gradient($gradient-one-dark, $gradient-two-dark);
+  padding-inline: 0;
+  &-option-box {
+    color: $black-main;
+    font-size: .7em;
+  }
+  .filter-button {
+    .focus {
+      filter: $svg-to-purple-dark;
+    }
+    &:hover {
+      .default {
+        opacity: 0;
+      }
+      .focus {
+        opacity: 1;
+      }
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 1.5rem;
+    border-radius: 0 7px 7px 0;
+  }
+  ::-webkit-scrollbar-track {
+    margin-block: .125em;
+  }
+}
+@media (min-width: 576px) {
+  .palettes {
+    padding-left: 1em;
+    padding-right: 1em;
+    &-outer-container {
+      border-radius: 12px;
+    }
+    &-inner-container {
+      border-radius: 11px;
+    }
+    &-option-box {
+      font-size: .6em;
+    }
+    .modal-form {
+      h3 {
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .palettes {
+    &-inner-container {
+      padding: 1.8rem;
+    }
+  }
+}
