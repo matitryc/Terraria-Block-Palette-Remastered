@@ -4,7 +4,7 @@
     primary
     text="Get Started"
     class="header-button"
-    @click="handleWelcomeButton"
+    link="#palettes"
   />
   <main>
     <section
@@ -35,6 +35,7 @@
       </div>
     </section>
     <SectionPalettes
+      ref="palettesSection"
       :palettes="paletteStore.palettes"
     />
     <SectionYourIdeas />
@@ -42,20 +43,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePaletteStore } from '@/stores/PaletteStore.js'
-import { useTagStore } from '@/stores/TagStore.js'
-import { usePaintStore } from '@/stores/PaintStore.js'
-import { useBlockStore } from '@/stores/BlockStore.js'
 import setScrollPadding from '@/js/setScrollPadding'
 import TheNavigation from '@/components/TheNavigation.vue'
 import SectionPalettes from '@/components/SectionPalettes.vue'
 import SectionYourIdeas from '@/components/SectionYourIdeas.vue'
 const paletteStore = usePaletteStore()
-const tagStore = useTagStore()
-const paintStore = usePaintStore()
-const blockStore = useBlockStore()
 const router = useRouter()
 const navLinks = [
   {
@@ -80,26 +75,8 @@ const navLinks = [
     isSamePage: true
   }
 ]
-const palettesSection = ref(null)
-const handleWelcomeButton = () => {
-  console.log(palettesSection.value)
-  const html = document.querySelector('html')
-  const sectionVerticalDistance = palettesSection.value.offsetTop
-  const navigationHeight = parseInt(html.style.scrollPaddingTop.slice(0, 2))
-  const scrollVertical = sectionVerticalDistance - navigationHeight
-  scrollTo(0, scrollVertical)
-}
 onMounted(async () => {
   setScrollPadding()
-  await paletteStore.fetchAll()
-  await tagStore.fetchAll()
-  await paintStore.fetchAll()
-})
-onUnmounted(() => {
-  paletteStore.clearPalettes()
-  tagStore.clearTags()
-  paintStore.clearPaint()
-  blockStore.clearBlocks()
 })
 </script>
 

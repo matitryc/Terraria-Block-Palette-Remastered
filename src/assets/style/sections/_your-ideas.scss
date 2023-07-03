@@ -35,6 +35,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .block {
+      border: 0;
+    }
   }
 
   .section-text {

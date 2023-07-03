@@ -49,12 +49,18 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import BlockListElement from '@/components/BlockListElement.vue'
+import { usePaletteStore } from '@/stores/PaletteStore.js'
+const paletteStore = usePaletteStore()
 defineProps({
   palettes: {
     type: Array,
     required: true
   }
+})
+onMounted(() => {
+  paletteStore.fetchAll()
 })
 </script>
 

@@ -6,32 +6,35 @@ export const fetchAllResources = async (collectionName) => {
 }
 export const fetchResourceOnConditions = async (collectionName, passedConditions) => {
   let conditions = []
-  if(passedConditions.andConditions){
-    console.log(passedConditions.andConditions)
+  const passedConditionsCloned = {...passedConditions}
+  if(passedConditionsCloned.andConditions){
+    console.log(passedConditionsCloned.andConditions)
     const ands = []
-    passedConditions.andConditions.forEach(choice => {
+    passedConditionsCloned.andConditions.forEach(choice => {
+      //column, operation(equals, greater than), value'
       ands.push(where(choice[0], choice[1], choice[2]))
     })
     conditions.push(and(...ands))
   }
-  if(passedConditions.orConditions){
+  if(passedConditionsCloned.orConditions){
     const ors = []
-    passedConditions.orConditions.forEach(choice => {
+    passedConditionsCloned.orConditions.forEach(choice => {
+      console.log(choice)
       ors.push(where(choice[0], choice[1], choice[2]))
     })
     conditions.push(or(...ors))
   }
-  if(passedConditions.where){
-    conditions.push(where(...passedConditions.where))
+  if(passedConditionsCloned.where){
+    conditions.push(where(...passedConditionsCloned.where))
   }
-  else if(passedConditions.limit){
-    conditions.push(limit(passedConditions.limit))
+  if(passedConditionsCloned.limit){
+    conditions.push(limit(passedConditionsCloned.limit))
   }
-  else if(passedConditions.orderBy){
-    conditions.push(orderBy(passedConditions.orderBy))
+  if(passedConditionsCloned.orderBy){
+    conditions.push(orderBy(passedConditionsCloned.orderBy))
   }
-  else if(passedConditions.startAfter){
-    conditions.push(startAfter(passedConditions.startAfter))
+  if(passedConditionsCloned.startAfter){
+    conditions.push(startAfter(passedConditionsCloned.startAfter))
   }
   const q = query(collection(db, collectionName), ...conditions)
   return await getDocs(q)

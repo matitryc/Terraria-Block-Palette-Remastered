@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { usePalettesModalOptions } from '@/composables/usePalettesModalOptions.js' 
+import { usePalettesModalOptions } from '@/composables/usePalettesModalOptions.js'
 defineProps({
   values: {
     type: Array,

@@ -6,7 +6,7 @@
     <div class="search-bar w-full">
       <input
         v-model="searchValue"
-        class="relative w-full z-20"
+        class="relative w-full"
         type="text"
         :placeholder="placeholder"
         @input="emit('valueChange', searchValue)"
@@ -15,7 +15,7 @@
     </div>
     <button
       class="search-button relative"
-      @click="search"
+      @click.prevent="search"
     >
       <div
         class="search-icon-box w-full h-full"
@@ -41,13 +41,13 @@
         class="search-results"
       >
         <div
-          v-for="(result, index) in results"
-          :key="index"
+          v-for="result in results"
+          :key="result"
           class="w-full"
         >
           <AppSearchResult
             :text="result"
-            @click="search(result)"
+            @click.prevent="search(result)"
           />
         </div>
       </div>
@@ -77,7 +77,7 @@ const emit = defineEmits(['valueChange', 'searchSuccess'])
 const searchValue = ref('')
 const search = (passedValue) => {
   if(props.results.length > 0){
-    if(typeof passedValue == typeof ''){
+    if(typeof passedValue === 'string'){
       emit('searchSuccess', passedValue)
       searchValue.value = ''
     } else {
@@ -94,8 +94,9 @@ const search = (passedValue) => {
   border: 3px solid $black-main;
   background-color: $white-darker;
   border-radius: 100vw;
-  z-index: 20;
-  
+  &.active {
+    border-radius: 27px 27px 0 0;
+  }
   &.active input,
   &.active .search-bar {
     border-radius: 20px 0 0 0;
@@ -115,7 +116,6 @@ const search = (passedValue) => {
   color: $black-main;
   border-right: 3px solid $black-main;
   border-radius: 100vw 0 0 100vw;
-  z-index: 20;
   &.active {
     border-radius: 100vw 0 0 0;
   }
@@ -124,7 +124,6 @@ const search = (passedValue) => {
   min-width: 50px;
   border-radius: 0 100vw 100vw 0;
   background-color: $white-darker;
-  z-index: 20;
   &::before {
     content: '';
     position: absolute;
@@ -156,28 +155,24 @@ const search = (passedValue) => {
 }
 $parent-border-width: 6px;
 $offset-to-parent: 3px;
-.search-results,
 .search-results-box {
-  position: absolute;
-  left: -$offset-to-parent;
-  width: Calc(100% + $parent-border-width);
-  border: 3px solid $black-main;
-  border-top: 0;
-  background-color: $black-main;
-}
-.search-results-box {
-  top: $offset-to-parent;
   height: Calc(100% + $offset-to-parent);
-  border-radius: 23px 23px 0 0;
   z-index: 10;
 }
 .search-results {
+  position: absolute;
+  left: -$offset-to-parent;
+  top: 100%;
+  width: Calc(100% + $parent-border-width);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  border: 3px solid $black-main;
+  border-top: 0;
+  background-color: $black-main;
   top: 100%;
-  z-index: 10;
+  z-index: 11;
   overflow-y: auto;
   max-height: 250px;
   &.no-results {
@@ -194,9 +189,6 @@ $offset-to-parent: 3px;
   margin-block: .25em;
 }
 @media (min-width: 576px) {
-  .search-results-box {
-    border-radius: 26px 26px 0 0;
-  }
   .search-bar-box.active input,
   .search-bar-box.active .search-bar {
     border-radius: 24px 0 0 0;

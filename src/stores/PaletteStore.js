@@ -9,10 +9,13 @@ export const usePaletteStore = defineStore('PaletteStore', {
   },
   actions: {
     setPalette(id, data){
-      this.palettes.push({
-        id,
-        ...data
-      })
+      const isSet = this.palettes.find(palette => palette.id === id)
+      if(!isSet){
+        this.palettes.push({
+          id,
+          ...data
+        })
+      }
     },
     async fetchAll(){
       const paletteDocs = await fetchAllResources('palettes')

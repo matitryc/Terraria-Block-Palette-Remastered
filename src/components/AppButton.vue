@@ -1,6 +1,7 @@
 <template>
   <button
-    class="relative text-3xl md:text-4xl rounded-xl border-4"
+    v-if="link === ''"
+    class="button relative text-3xl md:text-4xl rounded-xl border-4"
     :class="buttonClasses"
   >
     <span
@@ -9,6 +10,18 @@
       {{ text }}
     </span>
   </button>
+  <a
+    v-else
+    :href="props.link"
+    class="button relative text-3xl md:text-4xl rounded-xl border-4"
+    :class="buttonClasses"
+  >
+    <span
+      class="btn-text px-10 md:px-12 py-3 md:py-5 rounded-lg"
+    >
+      {{ text }}
+    </span>
+  </a>
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
@@ -24,6 +37,10 @@ const props = defineProps({
   text: {
     type: String,
     required: true
+  },
+  link: {
+    type: String,
+    default: ''
   }
 })
 const textForBind = ref(`"${props.text}"`)
@@ -32,8 +49,8 @@ const buttonClasses = reactive({
   secondary: props.secondary 
 })
 </script>
-<style lang="scss" scoped>
-button {
+<style lang="scss">
+.button {
   &::before {
     content: v-bind(textForBind);
     position: absolute;

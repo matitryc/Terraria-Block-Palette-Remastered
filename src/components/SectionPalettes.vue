@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import PaletteList from '@/components/PaletteList.vue'
 import PaletteListModal from '@/components/PaletteListModal.vue'
 import { useTagStore } from '@/stores/TagStore.js'
@@ -77,6 +77,9 @@ watch(tagSearchValue, async () => {
   } else {
     tagResults.value = tagStore.getTagsContainingPhrase(tagSearchValue.value.toLowerCase())
   }
+})
+onMounted(() => {
+  tagStore.fetchAll()
 })
 </script>
 

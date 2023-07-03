@@ -21,16 +21,21 @@ export const useTagStore = defineStore('TagStore', {
     }
   },
   actions: {
+    setOne(tag){
+      if(!this.tags.includes(tag)){
+        this.tags.push(tag)
+      }
+    },
     async fetchAll(){
       const tagDocs = await fetchAllResources('tags')
       tagDocs.forEach(doc => {
-        this.tags.push(doc.data().tag)
+        this.setOne(doc.data().tag)
       })
     },
     async fetchOnConditions(conditions){
       const tagDocs = await fetchResourceOnConditions('tags', conditions)
       tagDocs.forEach(doc => {
-        this.tags.push(doc.data().tag)
+        this.setOne(doc.data().tag)
       })
     },
     clearTags(){

@@ -19,7 +19,7 @@
         v-if="block.paint"
         :src="`https://firebasestorage.googleapis.com/v0/b/terraria-block-palette.appspot.com/o/blocks%2F${block.paint}Paint.png?alt=media&.png`"
         alt=""
-        class="block-paint absolute -bottom-2 -right-2 z-10"
+        class="block-paint absolute -bottom-2 -right-2"
       >
     </div>
     <BlockListElementTooltip
@@ -51,7 +51,7 @@ const getBlockCursorPosition = (e) => {
 const isTooltipActive = ref(false)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .active-comment {
   opacity: 1;
 }
@@ -66,6 +66,7 @@ const isTooltipActive = ref(false)
   &-paint {
     min-width: 21px;
     max-width: 21px;
+    z-index: 5;
   }
   &:focus &-tooltip {
       outline: none;
