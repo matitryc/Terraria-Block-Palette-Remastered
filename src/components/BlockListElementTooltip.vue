@@ -10,6 +10,9 @@
     <span v-if="block.paint">
       {{ `and ${block.paint} Paint` }}
     </span>
+    <span v-else>
+      without Paint
+    </span>
   </div>
 </template>
 
@@ -36,9 +39,18 @@ const setTooltipDirection = (el) => {
   const blockSize = block.getBoundingClientRect()
   const fromRight = document.body.clientWidth - blockSize.right
   if(blockSize.left >= fromRight){
-    return el.setAttribute('data-direction', 'left')
+    el.setAttribute('data-horizontal-direction', 'left')
   } else {
-    return el.setAttribute('data-direction', 'right')
+    el.setAttribute('data-horizontal-direction', 'right')
+  }
+  const modalBody = block.closest('.main-style-inner-container')
+  const modalSize = modalBody.getBoundingClientRect()
+  const fromTop = blockSize.top - modalSize.top
+  if(modalSize.height / 2 > fromTop){
+    el.setAttribute('data-vertical-direction', 'down')
+  }
+  else {
+    el.setAttribute('data-vertical-direction', 'up')
   }
 }
 watch(tooltip, () => {
@@ -48,13 +60,23 @@ watch(tooltip, () => {
 })
 watch(props, (newValue) => {
   if(tooltip.value){
-    const direction = tooltip.value.getAttribute('data-direction')
-    if(direction == 'right'){
-      tooltip.value.style.transform = `translate(Calc(0px + ${newValue.cursorPosition.x}px), Calc(-60px + ${newValue.cursorPosition.y}px))`
+    const horizontalDirection = tooltip.value.getAttribute('data-horizontal-direction')
+    const verticalDirection = tooltip.value.getAttribute('data-vertical-direction')
+    let transform = ''
+    if(horizontalDirection === 'right'){
+      transform += `Calc(0px + ${newValue.cursorPosition.x}px)`
     }
-    else if(direction == 'left'){
-      tooltip.value.style.transform = `translate(Calc(-97% + ${Math.floor(newValue.cursorPosition.x)}px), Calc(-60px + ${Math.floor(newValue.cursorPosition.y)}px))`
+    else {
+      transform += `Calc(-97% + ${Math.floor(newValue.cursorPosition.x)}px)`
     }
+    transform += ', '
+    if(verticalDirection === 'up'){
+      transform += `Calc(-60px + ${Math.floor(newValue.cursorPosition.y)}px)`
+    }
+    else {
+      transform += `Calc(23px + ${Math.floor(newValue.cursorPosition.y)}px)`
+    }
+    tooltip.value.style.transform = `translate(${transform})`
   }
 })
 </script>

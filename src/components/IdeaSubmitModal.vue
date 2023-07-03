@@ -1,18 +1,21 @@
 <template>
   <AppModal
     toggler=".finish-button"
-    @close="handleClose"
+    @close="emit('close')"
   >
     <form
       class="form-modal h-full"
-      @submit.prevent
+      @submit.prevent="handleSuccess"
     >
       <div class="submit-modal-header flex flex-col gap-3">
         <span class="submit-modal-title">
           Enter your nickname!
         </span>
-        <span class="submit-modal-info mb-2">
-          (only appropriate are approved)
+        <span
+          v-if="error"
+          class="text-2xl text-red-700"
+        >
+          Your username should be at least 3 characters long.
         </span>
         <input
           v-model="username"
@@ -22,22 +25,47 @@
       </div>
       <AppButton
         secondary
-        type="submit"
         text="Submit"
         class="mt-8"
-        @click.prevent="handleClose"
+        @click="submitPalette"
       />
     </form>
   </AppModal>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const emit = defineEmits(['close'])
+import { ref, watch } from 'vue'
+import { usePaletteStore } from '@/stores/PaletteStore'
+const paletteStore = usePaletteStore()
+const emit = defineEmits(['close', 'success'])
+const props = defineProps({
+  palette: {
+    type: Array,
+    required: true
+  }
+})
 const username = ref('')
-const handleClose = () => {
-  username.value = ''
+const error = ref(false)
+watch(username, () => {
+  if(username.value){
+    error.value = false
+  }
+})
+const handleSuccess = () => {
   emit('close')
+  emit('success')
+}
+const submitPalette = async (e) => {
+  if(!username.value || username.value.length < 3){
+    error.value = true
+    e.preventDefault()
+  }
+  else {
+    await paletteStore.addToDatabase({
+      ...props.palette,
+      username: username.value
+    })
+  }
 }
 </script>
 

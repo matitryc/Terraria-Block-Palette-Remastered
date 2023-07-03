@@ -3,6 +3,7 @@
     v-if="block"
     ref="blockRef"
     class="block relative"
+    :class="{ 'flex-center': !block.paint }"
     @mouseover="isTooltipActive = true"
     @mousemove="getBlockCursorPosition"
     @mouseout="isTooltipActive = false"
@@ -34,13 +35,12 @@
 <script setup>
 import { ref } from 'vue'
 import BlockListElementTooltip from '@/components/BlockListElementTooltip.vue'
-const props = defineProps({
+defineProps({
   block: {
     type: Object,
     default: null
   }
 })
-console.log(props.block)
 const blockRef = ref(null)
 const blockCursorPosition = ref(null)
 const getBlockCursorPosition = (e) => {
@@ -53,6 +53,11 @@ const isTooltipActive = ref(false)
 </script>
 
 <style lang="scss">
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .active-comment {
   opacity: 1;
 }

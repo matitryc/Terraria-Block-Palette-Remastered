@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { fetchAllResources, fetchResourceOnConditions } from '@/services/firebaseCalls.js'
+import { fetchAllResources, fetchResourceOnConditions, addResourceWithGeneratedIdInDatabase } from '@/services/firebaseCalls.js'
 
 export const usePaletteStore = defineStore('PaletteStore', {
   state: () => {
@@ -14,9 +14,9 @@ export const usePaletteStore = defineStore('PaletteStore', {
         this.palettes.push(palette)
       }
     },
-    // async submitPalette(){
-
-    // },
+    async addToDatabase(palette){
+      await addResourceWithGeneratedIdInDatabase('palettesToVerify', palette)
+    },
     async fetchAll(){
       const paletteDocs = await fetchAllResources('palettes')
       paletteDocs.forEach(doc => {

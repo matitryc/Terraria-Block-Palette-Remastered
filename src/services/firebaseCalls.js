@@ -1,8 +1,12 @@
 import { firebase } from '@/main.js'
-import { getFirestore, collection, getDocs, query, where, limit, orderBy, startAfter, or, and } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, query, where, limit, orderBy, startAfter, or, and, doc, setDoc } from 'firebase/firestore'
 const db = getFirestore(firebase)
 export const fetchAllResources = async (collectionName) => {
   return await getDocs(collection(db, collectionName))
+}
+export const addResourceWithGeneratedIdInDatabase = async (collectionName, resource) => {
+  const docRef = doc(collection(db, collectionName))
+  await setDoc(docRef, resource)
 }
 export const fetchResourceOnConditions = async (collectionName, passedConditions) => {
   let conditions = []

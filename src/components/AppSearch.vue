@@ -12,12 +12,12 @@
         :placeholder="placeholder"
         @focus="isFocused = true"
         @input="emit('valueChange', searchValue)"
-        @keyup.enter="search"
+        @keyup.prevent.enter="search"
       >
     </div>
     <button
       class="search-button relative"
-      @click="search"
+      @click.prevent="search"
     >
       <div
         class="search-icon-box w-full h-full"
@@ -88,7 +88,6 @@ const search = (passedValue) => {
       emit('searchSuccess', passedValue)
       searchValue.value = ''
     } else {
-      console.log(props.results)
       emit('searchSuccess', props.results[0].name)
       searchValue.value = ''
     }

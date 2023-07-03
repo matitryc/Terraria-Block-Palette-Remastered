@@ -5,7 +5,7 @@
   >
     <form
       class="modal-form h-full"
-      @submit.prevent
+      @submit.prevent="emit('close')"
     >
       <AppSearch
         placeholder="Search for a block"
@@ -19,7 +19,12 @@
         @value-change="value => paintSearch = value"
         @search-success="value => selectedPaint = value"
       />
-      <div class="flex gap-6 items-center">
+      <div class="flex gap-6 items-center justify-start w-full">
+        <AppButton
+          secondary
+          :text="`${!editedBlock.name ? 'Add' : 'Edit'}`"
+          @click="handleSubmit"
+        />
         <div class="block-preview">
           <div
             v-if="!selectedBlock"
@@ -33,11 +38,12 @@
             }"
           />
         </div>
-        <AppButton
-          secondary
-          :text="`${!editedBlock.name ? 'Add' : 'Edit'}`"
-          @click.prevent="handleSubmit"
-        />
+        <span
+          v-if="error"
+          class="text-2xl text-red-800"
+        >
+          Block must be provided
+        </span>
       </div>
     </form>
   </AppModal>
@@ -65,6 +71,12 @@ const props = defineProps({
 const emit = defineEmits(['close', 'addBlock', 'editBlock'])
 const selectedPaint = ref(props.editedBlock.paint)
 const selectedBlock = ref(props.editedBlock.name)
+const error = ref(false)
+watch(selectedBlock, () => {
+  if(selectedBlock.value){
+    error.value = false
+  }
+})
 const blockSearch = ref('')
 watch(blockSearch, async () => {
   const searchValueRefactored = refactorStringToCapitalCase(blockSearch.value)
@@ -87,8 +99,10 @@ const paintResults = computed(() => {
   return paintStore.getOnesContainingPhrase(paintSearch.value.toLowerCase())
 })
 const handleSubmit = () => {
-  if(selectedBlock.value !== ''){
+  if(selectedBlock.value){
+    error.value = false
     if(!props.editedBlock.name){ 
+      console.log(selectedBlock.value)
       emit('addBlock', {
         name: refactorStringToCapitalCase(selectedBlock.value),
         paint: refactorStringToCapitalCase(selectedPaint.value)
@@ -101,7 +115,9 @@ const handleSubmit = () => {
         paint: refactorStringToCapitalCase(selectedPaint.value)
       })
     }
-    emit('close')
+  }
+  else {
+    error.value = true
   }
 }
 onMounted(async () => {
