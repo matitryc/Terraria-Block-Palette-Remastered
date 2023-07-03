@@ -1,21 +1,23 @@
 <template>
   <div
     class="search-bar-box flex text-2xl"
-    :class="{ active: searchValue != '' }"
+    :class="{ active: isFocused && searchValue !== '' }"
   >
     <div class="search-bar w-full">
       <input
+        ref="input"
         v-model="searchValue"
         class="relative w-full"
         type="text"
         :placeholder="placeholder"
+        @focus="isFocused = true"
         @input="emit('valueChange', searchValue)"
         @keyup.enter="search"
       >
     </div>
     <button
       class="search-button relative"
-      @click.prevent="search"
+      @click="search"
     >
       <div
         class="search-icon-box w-full h-full"
@@ -33,7 +35,7 @@
       </div>
     </button>
     <div
-      v-if="searchValue != ''"
+      v-if="searchValue !== '' && isFocused"
       class="search-results-box"
     >
       <div
@@ -42,12 +44,12 @@
       >
         <div
           v-for="result in results"
-          :key="result"
+          :key="result.id"
           class="w-full"
         >
           <AppSearchResult
-            :text="result"
-            @click.prevent="search(result)"
+            :text="result.name"
+            @click="e => search(e.target.textContent.trim())"
           />
         </div>
       </div>
@@ -71,21 +73,29 @@ const props = defineProps({
   results: {
     type: Array,
     default: null
+  },
+  passedValue: {
+    type: String,
+    default: ''
   }
 })
 const emit = defineEmits(['valueChange', 'searchSuccess'])
-const searchValue = ref('')
+const input = ref(null)
+const searchValue = ref(props.passedValue)
 const search = (passedValue) => {
   if(props.results.length > 0){
     if(typeof passedValue === 'string'){
       emit('searchSuccess', passedValue)
       searchValue.value = ''
     } else {
-      emit('searchSuccess', props.results[0])
+      console.log(props.results)
+      emit('searchSuccess', props.results[0].name)
       searchValue.value = ''
     }
+    isFocused.value = false
   }
 }
+const isFocused = ref(false)
 </script>
 
 <style lang="scss" scoped>

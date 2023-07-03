@@ -5,7 +5,7 @@
     class="tooltip-content text-center flex flex-col"
   >
     <span>
-      {{ `${blockNameRefactored}` }}
+      {{ refactorUsingSplitWithUppercaseLetters(block.name) }}
     </span>
     <span v-if="block.paint">
       {{ `and ${block.paint} Paint` }}
@@ -30,7 +30,6 @@ const props = defineProps({
     default: null
   }
 })
-const blockNameRefactored = refactorUsingSplitWithUppercaseLetters(props.block.name)
 const tooltip = ref(null)
 const setTooltipDirection = (el) => {
   const block =  el.closest('.block')
@@ -80,5 +79,6 @@ watch(props, (newValue) => {
   transition: opacity .2s;
   z-index: 15;
   pointer-events: none;
+  isolation: isolate;
 }
 </style>

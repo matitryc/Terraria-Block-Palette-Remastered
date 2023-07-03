@@ -18,7 +18,9 @@
             Obtainability
           </h3>
           <PaletteListModalInput
-            :values="obtainabilities"
+            v-for="obtainability in obtainabilities"
+            :key="obtainability"
+            :value="obtainability"
             type="radio"
             name="obtainability"
           />
@@ -31,7 +33,9 @@
             Tags
           </h3>
           <PaletteListModalInput
-            :values="tags"
+            v-for="tag in tags"
+            :key="tag.id"
+            :value="tag.name"
             type="checkbox"
             name="tag"
           />

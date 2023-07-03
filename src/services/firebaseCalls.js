@@ -8,7 +8,6 @@ export const fetchResourceOnConditions = async (collectionName, passedConditions
   let conditions = []
   const passedConditionsCloned = {...passedConditions}
   if(passedConditionsCloned.andConditions){
-    console.log(passedConditionsCloned.andConditions)
     const ands = []
     passedConditionsCloned.andConditions.forEach(choice => {
       //column, operation(equals, greater than), value'

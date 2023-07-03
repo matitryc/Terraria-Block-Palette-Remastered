@@ -1,6 +1,6 @@
 <template>
   <AppModal
-    toggler=".add-block"
+    toggler=".modal-toggler"
     @close="emit('close')"
   >
     <form
@@ -35,8 +35,8 @@
         </div>
         <AppButton
           secondary
-          text="Add"
-          @click.prevent="emit('close')"
+          :text="`${!editedBlock.name ? 'Add' : 'Edit'}`"
+          @click.prevent="handleSubmit"
         />
       </div>
     </form>
@@ -51,15 +51,20 @@ import { usePaintStore } from '@/stores/PaintStore.js'
 import { useBlockStore } from '@/stores/BlockStore.js'
 const paintStore = usePaintStore()
 const blockStore = useBlockStore()
-const emit = defineEmits(['close'])
-const selectedPaint = ref('')
-watch(selectedPaint, () => {
-  selectedPaint.value = refactorStringToCapitalCase(selectedPaint.value)
+const props = defineProps({
+  editedBlock: {
+    type: Object,
+    default: () => {
+      return {
+        name: '',
+        paint: ''
+      }
+    }
+  }
 })
-const selectedBlock = ref('')
-watch(selectedBlock, () => {
-  selectedBlock.value = refactorStringToCapitalCase(selectedBlock.value)
-})
+const emit = defineEmits(['close', 'addBlock', 'editBlock'])
+const selectedPaint = ref(props.editedBlock.paint)
+const selectedBlock = ref(props.editedBlock.name)
 const blockSearch = ref('')
 watch(blockSearch, async () => {
   const searchValueRefactored = refactorStringToCapitalCase(blockSearch.value)
@@ -81,6 +86,24 @@ const paintSearch = ref('')
 const paintResults = computed(() => {
   return paintStore.getOnesContainingPhrase(paintSearch.value.toLowerCase())
 })
+const handleSubmit = () => {
+  if(selectedBlock.value !== ''){
+    if(!props.editedBlock.name){ 
+      emit('addBlock', {
+        name: refactorStringToCapitalCase(selectedBlock.value),
+        paint: refactorStringToCapitalCase(selectedPaint.value)
+      })
+    }
+    else {
+      emit('editBlock', {
+        id: props.editedBlock.id,
+        name: refactorStringToCapitalCase(selectedBlock.value),
+        paint: refactorStringToCapitalCase(selectedPaint.value)
+      })
+    }
+    emit('close')
+  }
+}
 onMounted(async () => {
   paintStore.fetchAll()
 })

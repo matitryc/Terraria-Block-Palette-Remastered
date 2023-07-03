@@ -6,17 +6,20 @@ export const refactorUsingSplitWithUppercaseLetters = (string) => {
 }
 
 export const refactorStringToCapitalCase = (string) => {
-  const stringSplit = string.split(' ')
-  //remove potential empty words
-  stringSplit.forEach((word, index) => {
-    if(word === ''){
-      stringSplit.splice(index, 1)
-    }
-  })
-  const searchValueCapitalized = stringSplit.map(word => word = word[0].toUpperCase() + word.slice(1, word.length))
-  let stringRefactored = ''
-  searchValueCapitalized.forEach(word => {
-    stringRefactored += word
-  })
-  return stringRefactored
+  if(string){
+    const stringSplit = string.split(' ')
+    //remove potential empty words
+    stringSplit.forEach((word, index) => {
+      if(word === ''){
+        stringSplit.splice(index, 1)
+      }
+    })
+    const searchValueCapitalized = stringSplit.map(word => word = word[0].toUpperCase() + word.slice(1, word.length))
+    let stringRefactored = ''
+    searchValueCapitalized.forEach(word => {
+      stringRefactored += word
+    })
+    return stringRefactored
+  }
+  return ''
 }

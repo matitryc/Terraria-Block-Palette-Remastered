@@ -11,10 +11,9 @@
         <h3 class="palette-title">
           {{ palette.title }}
         </h3>
-        <p class="palette-obtainability block text-center mb-4">
+        <p class="palette-obtainability flex flex-col justify-center text-center mb-4">
           Obtainability: 
           <span
-            class="flex justify-center"
             :data-obtainability="palette.obtainability"
             :class="
               { 

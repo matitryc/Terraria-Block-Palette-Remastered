@@ -16,9 +16,15 @@
       >
         <div class="main-style-outer-container w-full">
           <div class="main-style-inner-container flex flex-row">
-            <BlockListElement />
+            <BlockListElement
+              v-for="block in blocks"
+              :key="block.id"
+              :block="block"
+              class="cursor-pointer modal-toggler"
+              @click="() => handleBlockEdit(block)"
+            />
             <button
-              class="add-block relative"
+              class="add-block relative modal-toggler"
               @click.prevent="isBlockModalActive = true"
             >
               <div class="question-mark-box">
@@ -39,7 +45,10 @@
           <IdeaBlockModal
             v-if="isBlockModalActive"
             class="block-modal"
-            @close="isBlockModalActive = false"
+            :edited-block="editedBlock"
+            @close="closeModal"
+            @add-block="addBlock"
+            @edit-block="editBlock"
           />
           <IdeaSubmitModal
             v-if="isSubmitModalActive"
@@ -58,12 +67,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import BlockListElement from '@/components/BlockListElement.vue'
 import IdeaSubmitModal from '@/components/IdeaSubmitModal.vue'
 import IdeaBlockModal from '@/components/IdeaBlockModal.vue'
 const isSubmitModalActive = ref(false)
 const isBlockModalActive = ref(false)
+const blocks = reactive([])
+const editedBlock = ref({})
+const addBlock = (block) => {
+  blocks.push({
+    ...block,
+    id: Math.random()
+ })
+}
+const editBlock = (passedBlock) => {
+  const blockIndex = blocks.findIndex(block => block.id === passedBlock.id)
+  blocks[blockIndex] = passedBlock
+}
+const closeModal = () => {
+  editedBlock.value = {}
+  isBlockModalActive.value = false
+}
+const handleBlockEdit = (block) => {
+  editedBlock.value = block
+  isBlockModalActive.value = true
+}
 </script>
 
 <style lang="scss" scoped>

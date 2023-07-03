@@ -1,7 +1,5 @@
 <template>
   <div
-    v-for="(value, index) in values"
-    :key="index"
     class="flex justify-start items-center gap-2"
   >
     <input
@@ -22,8 +20,8 @@
 <script setup>
 import { usePalettesModalOptions } from '@/composables/usePalettesModalOptions.js'
 defineProps({
-  values: {
-    type: Array,
+  value: {
+    type: String,
     required: true
   },
   type: {

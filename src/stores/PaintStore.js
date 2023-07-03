@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { fetchAllResources, fetchResourceOnConditions } from '@/services/firebaseCalls.js'
-import { refactorUsingSplitWithUppercaseLetters } from '@/helpers/'
 
 export const usePaintStore = defineStore('PaintStore', {
   state: () => {
@@ -11,27 +10,27 @@ export const usePaintStore = defineStore('PaintStore', {
   getters: {
     getOnesContainingPhrase: (state) => {
       return (phrase) => {
-        return state.paints.filter(paint => paint.includes(phrase.toLowerCase()))
+        return state.paints.filter(paint => paint.name.toLowerCase().includes(phrase.toLowerCase()))
       }
     }
   },
   actions: {
-    setPaint(paint){
-      if(!this.paints.includes(paint)){
-        const paintRefactored = refactorUsingSplitWithUppercaseLetters(paint).toLowerCase()
-        this.paints.push(paintRefactored)
+    setOne(paint){
+      const isSet = this.paints.find(el => el.id === paint.id)
+      if(!isSet){
+        this.paints.push(paint)
       }
     },
     async fetchAll(){
       const paintDocs = await fetchAllResources('paint')
       paintDocs.forEach(doc => {
-        this.setPaint(doc.data().name)
+        this.setOne({id: doc.id, name: doc.data().name})
       })
     },
     async fetchOnConditions(conditions){
       const paintDocs = await fetchResourceOnConditions('paint', conditions)
       paintDocs.forEach(doc => {
-        this.setPaint(doc.data().name)
+        this.setOne({id: doc.id, name: doc.data().name})
       })
     },
     clearPaint(){

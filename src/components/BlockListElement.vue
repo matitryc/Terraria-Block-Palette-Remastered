@@ -34,12 +34,13 @@
 <script setup>
 import { ref } from 'vue'
 import BlockListElementTooltip from '@/components/BlockListElementTooltip.vue'
-defineProps({
+const props = defineProps({
   block: {
     type: Object,
     default: null
   }
 })
+console.log(props.block)
 const blockRef = ref(null)
 const blockCursorPosition = ref(null)
 const getBlockCursorPosition = (e) => {

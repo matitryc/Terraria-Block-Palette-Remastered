@@ -1,8 +1,15 @@
 const clickOutsideDirective = {
   mounted(el, binding){
     el.__clickOutsideHandler__ = e => {
-      const elToggler = document.querySelector(binding.value.toggler)
-      if(!(el === e.target || el.contains(e.target) || e.target == elToggler || elToggler.contains(e.target))) {
+      const elTogglers = [...document.querySelectorAll(binding.value.toggler)]
+      const isInAnyToggler = (target) => {
+        const isIn = elTogglers.find(toggler => toggler.contains(target))
+        if(isIn){
+          return true
+        }
+        return false
+      }
+      if(!(el === e.target || el.contains(e.target) || elTogglers.includes(e.target) || isInAnyToggler(e.target) || e.target.classList.contains('search-result'))) {
         binding.value.perform(e)
       }
     }
