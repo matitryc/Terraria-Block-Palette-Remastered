@@ -62,7 +62,7 @@ const submitPalette = async (e) => {
   }
   else {
     await paletteStore.addToDatabase({
-      ...props.palette,
+      blocks: [...props.palette],
       username: username.value
     })
   }

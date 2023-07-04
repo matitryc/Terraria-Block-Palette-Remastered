@@ -11,7 +11,7 @@
         <h3 class="palette-title">
           {{ palette.title }}
         </h3>
-        <p class="palette-obtainability flex flex-col justify-center text-center mb-4">
+        <p class="palette-obtainability flex flex-col justify-center text-center mb-2">
           Obtainability: 
           <span
             :data-obtainability="palette.obtainability"
@@ -25,6 +25,12 @@
           >
             {{ palette.obtainability }}
           </span>
+        </p>
+        <p
+          v-if="palette.username"
+          class="text-center text-lg text-gray-800 mb-4"
+        >
+          submitted by: <span class="text-green-700">{{ palette.username }}</span>
         </p>
         <div class="palette-tags flex flex-wrap justify-center text-center gap-2">
           <em
