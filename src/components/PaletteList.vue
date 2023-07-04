@@ -5,7 +5,7 @@
     <div
       v-for="palette in palettes"
       :key="palette.id"
-      class="palette"
+      class="palette h-max"
     >
       <div class="palette-info mb-4">
         <h3 class="palette-title">
@@ -122,10 +122,45 @@ span[data-obtainability="Hard"] {
     font-size: 1.9rem;
   }
 }
-
+@media(min-width: 768px){
+  .palette {
+    &:nth-child(odd){
+      grid-column: 1 / 2
+    }
+    &:nth-child(even) {
+      grid-column: 2 / 3
+    }
+  }
+}
 @media(min-width: 992px) {
   .palette {
     font-size: 2rem;
+    &:nth-child(3n+1){
+      grid-column: 1 / 2
+    }
+    &:nth-child(3n+2) {
+      grid-column: 2 / 3
+    }
+    &:nth-child(3n+3) {
+      grid-column: 2 / 3
+    }
+  }
+}
+@media(min-width: 1200px) {
+  .palette {
+    font-size: 2rem;
+    &:nth-child(4n+1){
+      grid-column: 1 / 2
+    }
+    &:nth-child(4n+2) {
+      grid-column: 2 / 3
+    }
+    &:nth-child(4n+3) {
+      grid-column: 3 / 4
+    }
+    &:nth-child(4n+4){
+      grid-column: 4 / 5
+    }
   }
 }
 </style>

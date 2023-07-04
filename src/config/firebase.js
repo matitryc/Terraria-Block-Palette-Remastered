@@ -1,9 +1,9 @@
 export default {
-  apiKey: 'AIzaSyALb8ji4VT-1jdMzFW11SI41hy-cvJHNcY',
-  authDomain: 'terraria-block-palette.firebaseapp.com',
-  projectId: 'terraria-block-palette',
-  storageBucket: 'terraria-block-palette.appspot.com',
-  messagingSenderId: '606920263827',
-  appId: '1:606920263827:web:8bbb602ac666b87202e566',
-  measurementId: 'G-1LVVX6VD4H'
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASURMENT_ID
 }

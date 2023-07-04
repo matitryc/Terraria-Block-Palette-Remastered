@@ -56,12 +56,14 @@
             @close="isSubmitModalActive = false"
             @success="celebrateSubmitSuccess"
           />
-          <p
-            v-if="error"
-            class="absolute bottom-0 w-full text-red-800 text-2xl text-center p-5"
-          >
-            To submit a palette, you need <span class="font-bold">at least 3</span> different blocks.
-          </p>
+          <Transition name="show">
+            <p
+              v-if="error && !success"
+              class="absolute bottom-0 w-full text-red-800 text-2xl text-center p-5"
+            >
+              To submit a palette, you need <span class="font-bold">at least 3</span> different blocks.
+            </p>
+          </Transition>
           <Transition name="show">
             <p
               v-if="success"
