@@ -3,4 +3,8 @@ A more advanced version of the previous TBP site. It has actual functionality, b
 
 It's being done in hopes of being deployed one day to help the Terraria community with their builds.
 
-It uses Vue 3 Composition API, Pinia and Firebase as a database.
+## Techstack
+-Vue 3 (Composition API)
+-Pinia
+-Sass
+-Firebase
