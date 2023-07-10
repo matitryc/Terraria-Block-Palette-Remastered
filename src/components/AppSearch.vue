@@ -11,6 +11,7 @@
         type="text"
         :placeholder="placeholder"
         @focus="isFocused = true"
+        @click="handleInputBlur"
         @input="emit('valueChange', searchValue)"
         @keyup.prevent.enter="search"
       >
@@ -91,6 +92,11 @@ const search = (passedValue) => {
       emit('searchSuccess', props.results[0].name)
       searchValue.value = ''
     }
+    isFocused.value = false
+  }
+}
+const handleInputBlur = (e) => {
+  if((e.target.classList.contains('search-results') || e.target.classList.contains('search-result'))){
     isFocused.value = false
   }
 }

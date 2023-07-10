@@ -91,22 +91,7 @@ import IdeaSubmitModal from '@/components/IdeaSubmitModal.vue'
 import IdeaBlockModal from '@/components/IdeaBlockModal.vue'
 const isSubmitModalActive = ref(false)
 const isBlockModalActive = ref(false)
-const blocks = ref([
-  {
-    id: Math.random(),
-    name: 'DirtBlock',
-    paint: 'Black'
-  },
-  {
-    id: Math.random(),
-    name: 'MudBlock',
-    paint: 'Black'
-  },
-  {
-    id: Math.random(),
-    name: 'DirtBlock'
-  }
-])
+const blocks = ref([])
 const editedBlock = ref({})
 const addBlock = (block) => {
   blocks.value.push({

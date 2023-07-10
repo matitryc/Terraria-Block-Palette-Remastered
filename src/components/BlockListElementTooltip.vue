@@ -44,13 +44,15 @@ const setTooltipDirection = (el) => {
     el.setAttribute('data-horizontal-direction', 'right')
   }
   const modalBody = block.closest('.main-style-inner-container')
-  const modalSize = modalBody.getBoundingClientRect()
-  const fromTop = blockSize.top - modalSize.top
-  if(modalSize.height / 2 > fromTop){
-    el.setAttribute('data-vertical-direction', 'down')
-  }
-  else {
-    el.setAttribute('data-vertical-direction', 'up')
+  if(modalBody){
+    const modalSize = modalBody.getBoundingClientRect()
+    const fromTop = blockSize.top - modalSize.top
+    if(modalSize.height / 2 > fromTop){
+      el.setAttribute('data-vertical-direction', 'down')
+    }
+    else {
+      el.setAttribute('data-vertical-direction', 'up')
+    }
   }
 }
 watch(tooltip, () => {

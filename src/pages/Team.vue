@@ -2,12 +2,14 @@
   <TheNavigation :nav-links="navLinks" />
   <main>
     <section class="section team flex flex-col">
-      <h2 class="section-title">
-        The Team
-      </h2>
-      <p class="section-text">
-        This the team. Yeah I'm a nobody :DD
-      </p>
+      <div class="wrapper">
+        <h2 class="section-title">
+          The Team
+        </h2>
+        <p class="section-text">
+          For now, only I (Mateusz Tryc) am working on this project. I plan to hire someone to do some cool graphics and maybe send this to some internet Terraria celebrity so it gets some recognition. : )
+        </p>
+      </div>
     </section>
   </main>
 </template>

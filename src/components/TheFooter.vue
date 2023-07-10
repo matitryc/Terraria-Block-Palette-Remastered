@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="wrapper">
-      <span class="footer-author text-2xl mb-4">edek strazak 2023</span>
+      <span class="footer-author text-2xl mb-4">Mateusz Tryc 2023</span>
       <div class="footer-content flex text-xl">
         <div class="footer-content-inner">
           <a href="#">

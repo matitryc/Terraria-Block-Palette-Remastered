@@ -1,6 +1,7 @@
 import { firebase } from '@/main.js'
 import { getFirestore, collection, getDocs, query, where, limit, orderBy, startAfter, or, and, doc, setDoc } from 'firebase/firestore'
-const db = getFirestore(firebase)
+export const db = getFirestore(firebase)
+
 export const fetchAllResources = async (collectionName) => {
   return await getDocs(collection(db, collectionName))
 }
