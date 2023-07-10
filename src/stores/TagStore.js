@@ -30,13 +30,13 @@ export const useTagStore = defineStore('TagStore', {
     async fetchAll(){
       const tagDocs = await fetchAllResources('tags')
       tagDocs.forEach(doc => {
-        this.setOne({id: doc.id, name: doc.data().tag})
+        this.setOne({id: doc.id, name: doc.data().name})
       })
     },
     async fetchOnConditions(conditions){
       const tagDocs = await fetchResourceOnConditions('tags', conditions)
       tagDocs.forEach(doc => {
-        this.setOne({id: doc.id, name: doc.data().tag})
+        this.setOne({id: doc.id, name: doc.data().name})
       })
     },
     clearTags(){

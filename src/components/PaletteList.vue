@@ -110,7 +110,7 @@ onMounted(() => {
     }
   }
 }
-span[data-obtainability="Super easy"] {
+span[data-obtainability="Super Easy"] {
   color: $green-main;
 }
 span[data-obtainability="Easy"] {

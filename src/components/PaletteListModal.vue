@@ -58,9 +58,9 @@ const obtainabilities = ['Super easy', 'Easy', 'Medium', 'Hard']
 const handleFilterOptionsChange = async () => {
   paletteStore.clearPalettes()
   const andConditions = []
-  checkedTags.value.forEach(tag => {
-    andConditions.push([`tags.${tag}`, '==', true])
-  })
+  if(checkedTags.value.length > 0){
+    andConditions.push(['tags', 'array-contains-any', checkedTags.value])
+  }
   checkedObtainabilities.value.forEach(obtainability => {
     andConditions.push(['obtainability', '==', obtainability])
   })

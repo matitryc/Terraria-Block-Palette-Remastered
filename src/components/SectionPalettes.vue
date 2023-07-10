@@ -43,6 +43,12 @@
             v-if="palettes"
             :palettes="palettes"
           />
+          <p
+            v-if="palettes.length === 0"
+            class="text-black text-3xl"
+          >
+            Oops, no palettes found. Try again later or reset filter options.
+          </p>
         </div>
         <PaletteListModal
           v-if="isPaletteModalActive"
@@ -61,7 +67,7 @@ import { useTagStore } from '@/stores/TagStore.js'
 import { usePaletteStore } from '@/stores/PaletteStore.js'
 const tagStore = useTagStore()
 const paletteStore = usePaletteStore()
-defineProps({
+const props = defineProps({
   palettes: {
     type: Array,
     required: true
@@ -77,6 +83,9 @@ watch(tagSearchValue, async () => {
   } else {
     tagResults.value = tagStore.getTagsContainingPhrase(tagSearchValue.value.toLowerCase())
   }
+})
+watch(props, () => {
+  console.log(props.palettes)
 })
 onMounted(() => {
   tagStore.fetchAll()
