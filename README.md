@@ -15,3 +15,5 @@ It's one problem is searching for a block to add to the build (firebase doesn't 
 - Pinia
 - Sass
 - Firebase
+
+Live: https://matitryc.github.io/Terraria-Block-Palette-Remastered/
