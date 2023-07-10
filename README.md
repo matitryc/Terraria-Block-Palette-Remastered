@@ -16,4 +16,4 @@ It's one problem is searching for a block to add to the build (firebase doesn't 
 - Sass
 - Firebase
 
-Live: [https://matitryc.github.io/Terraria-Block-Palette-Remastered/](https://terraria-block-palette-remastered.vercel.app)https://terraria-block-palette-remastered.vercel.app
+Live: https://terraria-block-palette-remastered.vercel.app
