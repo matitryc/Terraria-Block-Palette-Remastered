@@ -68,7 +68,7 @@ import { useTagStore } from '@/stores/TagStore.js'
 import { usePaletteStore } from '@/stores/PaletteStore.js'
 const tagStore = useTagStore()
 const paletteStore = usePaletteStore()
-const props = defineProps({
+defineProps({
   palettes: {
     type: Array,
     required: true
@@ -84,9 +84,6 @@ watch(tagSearchValue, async () => {
   } else {
     tagResults.value = tagStore.getTagsContainingPhrase(tagSearchValue.value.toLowerCase())
   }
-})
-watch(props, () => {
-  console.log(props.palettes)
 })
 onMounted(() => {
   tagStore.fetchAll()

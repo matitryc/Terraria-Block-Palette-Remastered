@@ -94,6 +94,7 @@ const search = (passedValue) => {
       searchValue.value = ''
     }
     isFocused.value = false
+    input.value.blur()
   }
 }
 const handleInputBlur = (e) => {

@@ -12,7 +12,7 @@ export const useTagStore = defineStore('TagStore', {
       return (phrase) => {
         const matchingTags = []
         state.tags.forEach(tag => {
-          if(tag.includes(phrase)){
+          if(tag.name.includes(phrase)){
             matchingTags.push(tag)
           }
         })
