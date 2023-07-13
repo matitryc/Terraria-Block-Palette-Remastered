@@ -4,13 +4,19 @@
       <span class="footer-author text-2xl mb-4">Mateusz Tryc 2023</span>
       <div class="footer-content flex text-xl">
         <div class="footer-content-inner">
-          <a href="#">
+          <a
+            href="#"
+            aria-label="Link to github"
+          >
             <img
               src="@/assets/github.svg"
               alt=""
             >
           </a>
-          <a href="#">
+          <a
+            href="#"
+            aria-label="Link to linkedin"
+          >
             <img
               src="@/assets/linkedin.svg"
               alt=""

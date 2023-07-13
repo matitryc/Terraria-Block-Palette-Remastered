@@ -17,6 +17,7 @@
       >
     </div>
     <button
+      :aria-label="placeholder"
       class="search-button relative"
       @click.prevent="search"
     >

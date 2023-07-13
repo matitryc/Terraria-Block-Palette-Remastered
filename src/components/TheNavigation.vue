@@ -12,6 +12,7 @@
           TbP
         </a>
         <button
+          aria-label="Nav mobile menu toggler"
           class="burger flex flex-col mr-5 sm:mr-7 md:mr-7 p-4 w-max"
           :class="{ active: isMobileActive }"
           @click="handleBurger"

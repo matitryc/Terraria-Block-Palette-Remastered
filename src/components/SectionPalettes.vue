@@ -23,6 +23,7 @@
             <div class="palettes-option-box flex gap-2 justify-between items-center opacity-75">
               <span class="sm:hidden">More options</span>
               <button
+                aria-label="Open filtering options for palettes"
                 class="filter-button relative z-10"
                 @click="isPaletteModalActive = true"
               >
