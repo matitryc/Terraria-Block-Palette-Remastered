@@ -13,7 +13,7 @@ It's one problem is searching for a block to add to the build (firebase doesn't 
 ## Techstack
 - Vue 3 (Composition API)
 - Pinia
-- Sass
+- SCSS
 - Firebase
 
 Live: https://terraria-block-palette-remastered.vercel.app
