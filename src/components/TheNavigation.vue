@@ -143,7 +143,7 @@ nav > div {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: Calc(100vh - 69px);
+  height: Calc(100vh - 58px);
   background-color: $black-main;
   transform: translateX(150%);
   transition: transform .5s;
